@@ -30,9 +30,9 @@ Although the product seems a bit unfinished, I spent around 30 hours total on th
 </table>
 
 ## Videos
-[Watch the Front Cover Video](public/frontcover_vid.mp4)
+[Watch the Front Cover Video](https://youtu.be/-qK--byJSI8)
 
-[Watch the Back Cover Video](public/backcover_vid.mp4)
+[Watch the Back Cover Video](https://youtu.be/lycM9FwqO_s)
 
 
 ## Project Notes
