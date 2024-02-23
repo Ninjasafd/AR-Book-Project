@@ -4,6 +4,7 @@
 <head>
   <title>Simple AR - A Web based AR for A-Frame</title>
   <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+  <script src="https://unpkg.com/aframe-event-set-component/dist/aframe-event-set-component.min.js"></script>
 </head>
 
 <body>
@@ -22,10 +23,22 @@
       <a-camera position="0 0 0"></a-camera>
     </a-scene> -->
 
-  <a-scene>
-    <a-entity simple-ar="src: target2.jpg; minCutOffValue: 100; betaValue:0.1;">
 
-      <a-plane position="0 0 0" rotation="0 0 0" width="0.01" height=".01" material="src: stones.jpg">
+
+  <a-scene>
+    <a-entity id="back-cover" simple-ar="src: backcover.jpg; ; minCutOffValue: 100; betaValue:0.1;" visible="false">
+      <!-- Back cover content -->
+      <a-text id="back-cover-text" value="Click me to display Information!" align="left" position="-0.5 .8 -1"
+        wrap-count="40" width="2" scale="0.5 0.5 0.5"></a-text>
+      <!-- AR button -->
+      <a-box id="ar-button" position="-0.75 1.25 -1" color="blue" scale=".1 .1 .1"></a-box>
+
+    </a-entity>
+
+
+    <!-- <a-entity id="front-cover-info" simple-ar="src: target.jpg; minCutOffValue: 100; betaValue:0.1;">
+
+      <a-plane position="0 0 0" rotation="0 0 0" width="0.01" height=".01" material="src: logo.jpg">
         <a-text value="Harry Potter" position="0 1 -3" align="center" color="#FFFFFF" width="6"></a-text>
         <a-text value="Order of the Phoenix" position="0 1 -4" align="center" color="#FFFFFF" width="5"></a-text>
         <a-text value="J.K. Rowling" position="0 1 -5" align="center" color="#FFFFFF" width="6"></a-text>
@@ -39,39 +52,83 @@
       <a-entity gltf-model="phoenix.glb" position=".5 0 0" 
         scale="0.05 0.05 0.05" 
         rotation="0 0 0">
-      </a-entity>
-
-      <a-entity gltf-model="phoenix.glb" position="0 1 0" 
-        scale="0.5 0.5 0.5" 
-        rotation="0 0 0">
-      </a-entity>
-
-    </a-entity>
+      </a-entity> -->
+    <!-- </a-entity> -->
 
     <a-camera position="0 0 0"></a-camera>
+
+
   </a-scene>
 
 
+
   <script>
-    window.addEventListener('load', () => {
-      const img = new Image();
-      img.onload = () => {
-        const aspectRatio = img.width / img.height;
-        const plane = document.querySelector('a-plane');
-        plane.setAttribute('width', aspectRatio);
-        plane.setAttribute('height', 1); // Assuming height is 1 unit
-      };
-      img.src = 'stones.jpg'; // Ensure this path is correct
+    // window.addEventListener('load', () => {
+    //   const img = new Image();
+    //   img.onload = () => {
+    //     const aspectRatio = img.width / img.height;
+    //     const plane = document.querySelector('a-plane');
+    //     plane.setAttribute('width', aspectRatio);
+    //     plane.setAttribute('height', 1); // Assuming height is 1 unit
+    //   };
+    //   img.src = 'target.jpg'; // Ensure this path is correct
+    // });
+
+    // Function to toggle between book information and review
+    const arButton = document.querySelector('#ar-button');
+    const backCoverText = document.querySelector('#back-cover-text');
+    let showingReview = false;
+
+    let Book_Review = "";
+
+    let Book_Info = `ISBN-13:	9780439358071
+Publisher:	Scholastic, Inc.
+Publication date:	09/01/2004
+Series:	Harry Potter
+Edition description:	Reprint
+Pages:	896
+Sales rank:	6,996
+Product dimensions:	5.20(w) x 7.50(h) x 2.10(d)
+Age Range:	9 - 12 Years
+`;
+
+    arButton.addEventListener('click', function () {
+      if (showingReview) {
+        backCoverText.setAttribute('value', Book_Info);
+        console.log('Switched to Book Information');
+      } else {
+        backCoverText.setAttribute('value', Book_Review);
+        console.log('Switched to Book Review');
+      }
+      showingReview = !showingReview;
     });
-    document.addEventListener('DOMContentLoaded', () => {
-      const marker = document.querySelector('#marker');
-      marker.addEventListener('markerFound', event => {
-        console.log('Marker found!');
-      });
-      marker.addEventListener('markerLost', event => {
-        console.log('Marker lost!');
-      });
+
+    // For Debuggin purposes
+    document.addEventListener('keydown', function (event) {
+      if (event.code === 'Space') { 
+        if (showingReview) {
+          backCoverText.setAttribute('value', Book_Info);
+          console.log('Switched to Book Information');
+        } else {
+          backCoverText.setAttribute('value', Book_Review);
+          console.log('Switched to Book Review');
+        }
+        showingReview = !showingReview;
+      }
     });
+
+
+
+    // Event listeners for marker detection
+    const backCover = document.querySelector('#back-cover');
+    backCover.addEventListener('markerFound', () => {
+      backCover.setAttribute('visible', true);
+    });
+    backCover.addEventListener('markerLost', () => {
+      backCover.setAttribute('visible', false);
+    });
+
+
   </script>
 
 </body>
