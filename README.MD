@@ -12,11 +12,6 @@ Although the product seems a bit unfinished, I spent around 30 hours total on th
 - **Accessing the Experience**: Navigate to `localhost:3000` in a web browser. This should trigger your webcam to turn on.
 - **Engaging with AR**: Grant webcam permissions to interact with the AR book cover. Hold the book cover image in front of the webcam to see the AR elements come to life.
 
-## Code Limitations and Errors
-- **One Scene at a Time**: I ran into a lot of issues where having multiple scenes cauased some issues with texts and planes. Because of these issues, I tested scenes individually, which explains the two videos.
-- **Calibration Issues** - With my bad quality webcam, a lot of information is lost from the actual video to the script. Due to this, it's extremely hard to find the correct image. It can take up to a few minutes to focus correctly, even with a lower cutoff limit for detection.
-- **Int8Array Conversion Error**: An intermittent error related to the `min.js` file may cause the AR scenes to render incorrectly. I wasn't sure how to fix this because it came from one of the script files I was using. However, re-running the server seems to fix this issue temporarily. Because of this issue, I have console open, in order to show if my code is running properly.
-
 ## Project Structure & Components
 - The `index.html` file serves as the entry point for the AR scenes, leveraging additional assets stored within the project's directories.
 - Models and images used in the AR scenes are located in their respective folders and are referenced within the HTML file to create a visually appealing AR experience.
@@ -33,6 +28,11 @@ Although the product seems a bit unfinished, I spent around 30 hours total on th
 [Watch the Front Cover Video](https://youtu.be/-qK--byJSI8)
 
 [Watch the Back Cover Video](https://youtu.be/lycM9FwqO_s)
+
+## Code Limitations and Errors
+- **One Scene at a Time**: I ran into a lot of issues where having multiple scenes cauased some issues with texts and planes. Because of these issues, I tested scenes individually, which explains the two videos.
+- **Calibration Issues** - With my bad quality webcam, a lot of information is lost from the actual video to the script. Due to this, it's extremely hard to find the correct image. It can take up to a few minutes to focus correctly, even with a lower cutoff limit for detection.
+- **Int8Array Conversion Error**: An intermittent error related to the `min.js` file may cause the AR scenes to render incorrectly. I wasn't sure how to fix this because it came from one of the script files I was using. However, re-running the server seems to fix this issue temporarily. Because of this issue, I have console open, in order to show if my code is running properly.
 
 
 ## Project Notes
