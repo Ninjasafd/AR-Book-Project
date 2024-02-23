@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Simple AR - A Web based AR for A-Frame</title>
+  <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+  <script src="https://unpkg.com/aframe-event-set-component/dist/aframe-event-set-component.min.js"></script>
+</head>
+
+<body>
+  <script src="https://cdn.jsdelivr.net/gh/akbartus/Simple-AR/dist/0.1.2/simple-ar.min.js"
+    onload="onWasmLoaded();"></script>
+
+  <a-scene>
+    <a-entity id="back-cover" simple-ar="src: backcover.jpg; ; minCutOffValue: 100; betaValue:0.1;" visible="false">
+     
+      <a-text id="back-cover-text" value="Click me to display Information!" align="left" position="-0.5 .25 -.5"
+        wrap-count="40" width="2" scale="0.5 0.5 0.5"></a-text>
+      
+      <a-box id="ar-button" position="-0.75 1.25 -1" color="blue" scale=".1 .1 .1"></a-box>
+
+      <a-entity gltf-model="great_hall.glb" position="1 -0.5 0" 
+        scale="0.05 0.05 0.05" 
+        rotation="0 -90 0">
+      </a-entity> 
+
+      <a-entity gltf-model="harry_potter.glb" position="-.75 -0.5 0" 
+        scale=".2 .2 .2" 
+        rotation="0 90 0">
+      </a-entity> 
+
+
+      <a-plane position="0 -1 -1"  material="src: hogwarts_logo.jpg"></a-plane>
+
+    </a-entity>
+
+    <a-camera position="0 0 0"></a-camera>
+  </a-scene>
+
+  <script>
+    const arButton = document.querySelector('#ar-button');
+    const backCoverText = document.querySelector('#back-cover-text');
+    let showingReview = false;
+
+    let Book_Review = `Harry Potter and the Order of the Phoenix" delves into the complexities of Harry's fifth year at Hogwarts. As Voldemort's power intensifies, Harry grapples with a wizarding community in denial and a hostile Ministry of Magic. With the resurrection of the Order of the Phoenix, a secret society, Harry learns more about his destiny. The book's rich exploration of loyalty, propaganda, and authority resonates deeply, and it's a favorite of mine for its darker tone and the growth it charts in Harry and his friends. It's a pivotal installment that sets the stage for the ultimate battle that lies ahead, with character development and plot intricacies that make it a standout in the series`;
+
+    let Book_Info = `ISBN-13:	9780439358071
+Publisher:	Scholastic, Inc.
+Publication date:	09/01/2004
+Series:	Harry Potter
+Edition description:	Reprint
+Pages:	896
+Sales rank:	6,996
+Product dimensions:	5.20(w) x 7.50(h) x 2.10(d)
+Age Range:	9 - 12 Years
+`;
+
+    arButton.addEventListener('click', function () {
+      if (showingReview) {
+        backCoverText.setAttribute('value', Book_Info);
+        console.log('Switched to Book Information');
+      } else {
+        backCoverText.setAttribute('value', Book_Review);
+        console.log('Switched to Book Review');
+      }
+      showingReview = !showingReview;
+    });
+
+    // For Debugging purposes
+    // document.addEventListener('keydown', function (event) {
+    //   if (event.code === 'Space') {
+    //     if (showingReview) {
+    //       backCoverText.setAttribute('value', Book_Info);
+    //       console.log('Switched to Book Information');
+    //     } else {
+    //       backCoverText.setAttribute('value', Book_Review);
+    //       console.log('Switched to Book Review');
+    //     }
+    //     showingReview = !showingReview;
+    //   }
+    // });
+
+
+    const backCover = document.querySelector('#back-cover');
+    backCover.addEventListener('markerFound', () => {
+      backCover.setAttribute('visible', true);
+    });
+    backCover.addEventListener('markerLost', () => {
+      backCover.setAttribute('visible', false);
+    });
+  </script>
+
+</body>
+
+</body>
+
+</html>

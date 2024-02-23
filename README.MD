@@ -7,12 +7,15 @@ This project explores the creation of an Augmented Reality (AR) experience using
 Although the product seems a bit unfinished, I spent around 30 hours total on this project. I've been having issues designing with Unity and my webcam, so I decided to look at alternative options. At first, I was working off of an AR.js framework I was previously working, but around 10 hours in, I discovered that it was not possible to detect actual images but only hiro markers. No matter what example I tried online, they didn't seem to work. Because of this, I had to change to a different framework, namely `Easy-AR`, which I was then able to build this project on.
 
 ## Technical Setup & Execution
+- **Necessary Resources**: Make sure you have `node.js` installed on your computer.
 - **Server Initialization**: Execute `node server.js` within the command line to boot up the local server.
 - **Accessing the Experience**: Navigate to `localhost:3000` in a web browser. This should trigger your webcam to turn on.
 - **Engaging with AR**: Grant webcam permissions to interact with the AR book cover. Hold the book cover image in front of the webcam to see the AR elements come to life.
 
-## Common Issues & Troubleshooting
-- **Int8Array Conversion Error**: An intermittent error related to the `min.js` file may cause the AR scenes to render incorrectly. I wasn't sure how to fix this because it came from one of the script files I was using. However, re-running the server seems to fix this issue temporarily.
+## Code Limitations and Errors
+- **One Scene at a Time**: I ran into a lot of issues where having multiple scenes cauased some issues with texts and planes. Because of these issues, I tested scenes individually, which explains the two videos.
+- **Calibration Issues** - With my bad quality webcam, a lot of information is lost from the actual video to the script. Due to this, it's extremely hard to find the correct image. It can take up to a few minutes to focus correctly, even with a lower cutoff limit for detection.
+- **Int8Array Conversion Error**: An intermittent error related to the `min.js` file may cause the AR scenes to render incorrectly. I wasn't sure how to fix this because it came from one of the script files I was using. However, re-running the server seems to fix this issue temporarily. Because of this issue, I have console open, in order to show if my code is running properly.
 
 ## Project Structure & Components
 - The `index.html` file serves as the entry point for the AR scenes, leveraging additional assets stored within the project's directories.
@@ -27,8 +30,9 @@ Although the product seems a bit unfinished, I spent around 30 hours total on th
 </table>
 
 ## Videos
-[Watch the Back Cover Video](public/backcover_vid.mp4)
+[Watch the Front Cover Video](public/frontcover_vid.mp4)
 
+[Watch the Back Cover Video](public/backcover_vid.mp4)
 
 
 ## Project Notes
@@ -38,4 +42,5 @@ Although the product seems a bit unfinished, I spent around 30 hours total on th
 
 ## Additional Resources
 - More detailed documentation on AR.js and Easy-AR can be found on their respective official websites.
+- I used a lot of models that others made. I found most of them at [this link](https://sketchfab.com/)
 - For a deeper understanding of the code and AR interactions, refer to the inline comments within the `index.html` file.

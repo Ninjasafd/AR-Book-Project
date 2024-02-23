@@ -10,76 +10,67 @@
 <body>
   <script src="https://cdn.jsdelivr.net/gh/akbartus/Simple-AR/dist/0.1.2/simple-ar.min.js"
     onload="onWasmLoaded();"></script>
-  <!-- <a-scene>
-      <a-entity simple-ar="src: target2.jpg; minCutOffValue: 10; betaValue:0.1;">
-        <a-plane
-          position="0 0 0"
-          rotation="0 0 0"
-          width="1"
-          height="1"
-          material="src: https://upload.wikimedia.org/wikipedia/en/a/a9/Example.jpg"
-        ></a-plane>
-      </a-entity>
-      <a-camera position="0 0 0"></a-camera>
-    </a-scene> -->
-
-
 
   <a-scene>
     <a-entity id="back-cover" simple-ar="src: backcover.jpg; ; minCutOffValue: 100; betaValue:0.1;" visible="false">
-      <!-- Back cover content -->
-      <a-text id="back-cover-text" value="Click me to display Information!" align="left" position="-0.5 .8 -1"
+
+      <a-text id="back-cover-text" value="Click me to display Information!" align="left" position="-0.5 .25 -.5"
         wrap-count="40" width="2" scale="0.5 0.5 0.5"></a-text>
-      <!-- AR button -->
+
       <a-box id="ar-button" position="-0.75 1.25 -1" color="blue" scale=".1 .1 .1"></a-box>
+
+      <a-entity gltf-model="great_hall.glb" position="1 -0.5 0" scale="0.05 0.05 0.05" rotation="0 -90 0">
+      </a-entity>
+
+      <a-entity gltf-model="harry_potter.glb" position="-.75 -0.5 0" scale=".2 .2 .2" rotation="0 90 0">
+      </a-entity>
+
+      <a-plane position="0 -1 -1" material="src: hogwarts_logo.jpg"></a-plane>
 
     </a-entity>
 
-
-    <!-- <a-entity id="front-cover-info" simple-ar="src: target.jpg; minCutOffValue: 100; betaValue:0.1;">
-
-      <a-plane position="0 0 0" rotation="0 0 0" width="0.01" height=".01" material="src: logo.jpg">
-        <a-text value="Harry Potter" position="0 1 -3" align="center" color="#FFFFFF" width="6"></a-text>
-        <a-text value="Order of the Phoenix" position="0 1 -4" align="center" color="#FFFFFF" width="5"></a-text>
-        <a-text value="J.K. Rowling" position="0 1 -5" align="center" color="#FFFFFF" width="6"></a-text>
-      </a-plane>
-
-      <a-entity gltf-model="elders_wand/scene.gltf" position="-1 0 0" 
-        scale="1.2 1.2 1.2" 
-        rotation="0 0 90">
-      </a-entity>
-
-      <a-entity gltf-model="phoenix.glb" position=".5 0 0" 
-        scale="0.05 0.05 0.05" 
-        rotation="0 0 0">
-      </a-entity> -->
-    <!-- </a-entity> -->
-
     <a-camera position="0 0 0"></a-camera>
 
+    <a-entity id="front-cover-info" simple-ar="src: target2.jpg; minCutOffValue: 100; betaValue:0.1;">
 
+      <a-plane position="0 0 -.1" rotation="0 0 0" material="src: logo.jpg">
+
+      </a-plane>
+      <a-text id="back-cover-text" value="Harry Potter\nOrder of the Phoenix\nJ.K. Rowling" align="center"
+        position="0 0.5 0.1" wrap-count="40" width="2" scale="0.5 0.5 0.5"></a-text>
+
+      <a-entity gltf-model="elders_wand/scene.gltf" position="-0.4 -0.2 0.3" scale="0.5 0.5 0.5" rotation="0 0 90">
+      </a-entity>
+
+      <a-entity gltf-model="harry_potter_lord_voldemort.glb" position="-.5 -0.7 0.5" scale="0.5 0.5 0.5"
+        rotation="0 90 0">
+      </a-entity>
+
+      <a-entity gltf-model="transylvanian_barb.glb" position="2 8 0.5" scale="0.01 0.01 0.01" rotation="0 90 0">
+      </a-entity>
+
+      <a-entity gltf-model="phoenix.glb" position="1 -0.3 0.5" scale="0.5 0.5 0.5" rotation="0 -90 0">
+      </a-entity>
+    </a-entity>
   </a-scene>
 
-
-
   <script>
-    // window.addEventListener('load', () => {
-    //   const img = new Image();
-    //   img.onload = () => {
-    //     const aspectRatio = img.width / img.height;
-    //     const plane = document.querySelector('a-plane');
-    //     plane.setAttribute('width', aspectRatio);
-    //     plane.setAttribute('height', 1); // Assuming height is 1 unit
-    //   };
-    //   img.src = 'target.jpg'; // Ensure this path is correct
-    // });
+    window.addEventListener('load', () => {
+      const img = new Image();
+      img.onload = () => {
+        const aspectRatio = img.width / img.height;
+        const plane = document.querySelector('a-plane');
+        plane.setAttribute('width', aspectRatio);
+        plane.setAttribute('height', 1); // Assuming height is 1 unit
+      };
+      img.src = 'target.jpg'; // Ensure this path is correct
+    });
 
-    // Function to toggle between book information and review
     const arButton = document.querySelector('#ar-button');
     const backCoverText = document.querySelector('#back-cover-text');
     let showingReview = false;
 
-    let Book_Review = "";
+    let Book_Review = `Harry Potter and the Order of the Phoenix" delves into the complexities of Harry's fifth year at Hogwarts. As Voldemort's power intensifies, Harry grapples with a wizarding community in denial and a hostile Ministry of Magic. With the resurrection of the Order of the Phoenix, a secret society, Harry learns more about his destiny. The book's rich exploration of loyalty, propaganda, and authority resonates deeply, and it's a favorite of mine for its darker tone and the growth it charts in Harry and his friends. It's a pivotal installment that sets the stage for the ultimate battle that lies ahead, with character development and plot intricacies that make it a standout in the series`;
 
     let Book_Info = `ISBN-13:	9780439358071
 Publisher:	Scholastic, Inc.
@@ -103,23 +94,21 @@ Age Range:	9 - 12 Years
       showingReview = !showingReview;
     });
 
-    // For Debuggin purposes
-    document.addEventListener('keydown', function (event) {
-      if (event.code === 'Space') { 
-        if (showingReview) {
-          backCoverText.setAttribute('value', Book_Info);
-          console.log('Switched to Book Information');
-        } else {
-          backCoverText.setAttribute('value', Book_Review);
-          console.log('Switched to Book Review');
-        }
-        showingReview = !showingReview;
-      }
-    });
+    // For Debugging purposes
+    // document.addEventListener('keydown', function (event) {
+    //   if (event.code === 'Space') {
+    //     if (showingReview) {
+    //       backCoverText.setAttribute('value', Book_Info);
+    //       console.log('Switched to Book Information');
+    //     } else {
+    //       backCoverText.setAttribute('value', Book_Review);
+    //       console.log('Switched to Book Review');
+    //     }
+    //     showingReview = !showingReview;
+    //   }
+    // });
 
 
-
-    // Event listeners for marker detection
     const backCover = document.querySelector('#back-cover');
     backCover.addEventListener('markerFound', () => {
       backCover.setAttribute('visible', true);

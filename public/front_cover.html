@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Simple AR - A Web based AR for A-Frame</title>
+  <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+  <script src="https://unpkg.com/aframe-event-set-component/dist/aframe-event-set-component.min.js"></script>
+</head>
+
+<body>
+  <script src="https://cdn.jsdelivr.net/gh/akbartus/Simple-AR/dist/0.1.2/simple-ar.min.js"
+    onload="onWasmLoaded();"></script>
+  <!-- <a-scene>
+      <a-entity simple-ar="src: target2.jpg; minCutOffValue: 10; betaValue:0.1;">
+        <a-plane
+          position="0 0 0"
+          rotation="0 0 0"
+          width="1"
+          height="1"
+          material="src: https://upload.wikimedia.org/wikipedia/en/a/a9/Example.jpg"
+        ></a-plane>
+      </a-entity>
+      <a-camera position="0 0 0"></a-camera>
+    </a-scene> -->
+
+
+
+  <a-scene>
+
+
+    <a-entity id="front-cover-info" simple-ar="src: target2.jpg; minCutOffValue: 100; betaValue:0.1;">
+
+      <a-plane position="0 0 -.1" rotation="0 0 0"material="src: logo.jpg">
+    
+      </a-plane>
+      <a-text id="back-cover-text" value="Harry Potter\nOrder of the Phoenix\nJ.K. Rowling" align="center" position="0 0.5 0.1"
+        wrap-count="40" width="2" scale="0.5 0.5 0.5"></a-text>
+
+      <a-entity gltf-model="elders_wand/scene.gltf" position="-0.4 -0.2 0.3" 
+        scale="0.5 0.5 0.5" 
+        rotation="0 0 90">
+      </a-entity>
+
+      <a-entity gltf-model="harry_potter_lord_voldemort.glb" position="-.5 -0.7 0.5" 
+        scale="0.5 0.5 0.5" 
+        rotation="0 90 0">
+      </a-entity> 
+
+      <a-entity gltf-model="transylvanian_barb.glb" position="2 8 0.5" 
+        scale="0.01 0.01 0.01" 
+        rotation="0 90 0">
+      </a-entity> 
+      
+
+      <a-entity gltf-model="phoenix.glb" position="1 -0.3 0.5" 
+        scale="0.5 0.5 0.5" 
+        rotation="0 -90 0">
+      </a-entity> 
+
+      
+
+
+
+    </a-entity>
+
+    <a-camera position="0 0 0"></a-camera>
+
+
+  </a-scene>
+
+
+
+  <script>
+    window.addEventListener('load', () => {
+      const img = new Image();
+      img.onload = () => {
+        const aspectRatio = img.width / img.height;
+        const plane = document.querySelector('a-plane');
+        plane.setAttribute('width', aspectRatio);
+        plane.setAttribute('height', 1); // Assuming height is 1 unit
+      };
+      img.src = 'target.jpg'; // Ensure this path is correct
+    });
+
+  </script>
+
+</body>
+
+</body>
+
+</html>
